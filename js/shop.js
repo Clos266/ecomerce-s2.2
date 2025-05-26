@@ -1,4 +1,3 @@
-// If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
 var products = [
   {
     id: 1,
@@ -78,7 +77,6 @@ var total = 0;
 function buy(id) {
   // 1. Loop for to the array products to get the item to add to cart
   // 2. Add found product to the cart array
-
   let cartProduct = [];
   let product = products.find((item) => {
     return item.id === id;
@@ -94,32 +92,10 @@ function buy(id) {
     console.log("cartProduct", cartProduct, cartProduct.quantity);
   }
 
-  const cartTable = document.getElementById("cart_list");
-  cartTable.innerHTML = ""; // Vacía la tabla
-
-  // Recorre TODO el carrito y lo imprime
-  cart.forEach((item) => {
-    cartTable.innerHTML += `<tr><th scope="row">${item.name}</th>
-    <td>${item.price}</td>
-    <td>${item.quantity}</td>
-    <td>${(item.price * item.quantity).toFixed(2)}</td></tr>`;
-  });
-  /*
-  document.getElementById("cart_list").innerHTML += `<tr><th scope="row">${
-    cartProduct ? cartProduct.name : product.name
-  }</th>
-								<td>${cartProduct ? cartProduct.price : product.price}</td>
-								<td>${cartProduct ? cartProduct.quantity : 1}</td>
-								<td>${
-                  cartProduct
-                    ? cartProduct.price * cartProduct.quantity
-                    : product.price
-                }</td></tr>`;*/
-  console.log(cart);
-
+  applyPromotionsCart();
+  printCart();
   calculateTotal();
-  // 1. Loop for to the array products to get the item to add to cart
-  // 2. Add found product to the cart array
+  countProduct();
 }
 
 // Exercise 2
@@ -127,21 +103,68 @@ function cleanCart() {
   const cartTable = document.getElementById("cart_list");
   cartTable.innerHTML = ""; // Vacía la tabla
   document.getElementById("total_price").innerHTML = "00.00";
+  cart = [];
 }
 
 // Exercise 3
 function calculateTotal() {
   // Calculate total price of the cart using the "cartList" array
+  total = 0;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].subtotalWithDiscount) {
+      total += cart[i].subtotalWithDiscount;
+    } else {
+      total += cart[i].price * cart[i].quantity;
+    }
+  }
+  document.getElementById("total_price").innerHTML = total.toFixed(2);
 }
 
 // Exercise 4
+
 function applyPromotionsCart() {
   // Apply promotions to each item in the array "cart"
+  if (!Array.isArray(cart)) {
+    console.error("cart no es un array:", cart);
+    return;
+  }
+
+  for (let item of cart) {
+    let originalProduct = products.find((p) => p.id === item.id);
+
+    if (originalProduct && originalProduct.offer) {
+      if (item.quantity >= originalProduct.offer.number) {
+        let discount = originalProduct.offer.percent;
+        let discountedPrice = originalProduct.price * (1 - discount / 100);
+        item.subtotalWithDiscount = discountedPrice * item.quantity;
+      }
+    }
+  }
 }
 
 // Exercise 5
 function printCart() {
   // Fill the shopping cart modal manipulating the shopping cart dom
+  const cartTable = document.getElementById("cart_list");
+  cartTable.innerHTML = "";
+
+  cart.forEach((item) => {
+    cartTable.innerHTML += `<tr><th scope="row">${item.name}</th>
+    <td>${item.price}</td>
+    <td>${item.quantity}</td>
+    <td>${(item.subtotalWithDiscount ?? item.price * item.quantity).toFixed(
+      2
+    )}</td></tr>`;
+  });
+}
+function countProduct() {
+  let count = 0;
+  cart.forEach((item) => {
+    count += parseInt(item.quantity);
+  });
+  document.getElementById("count_product").innerHTML = count;
+  console.log(count);
+  return count;
 }
 
 // ** Nivell II **
