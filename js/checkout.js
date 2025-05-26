@@ -1,6 +1,4 @@
-// Exercise 6
 function validate() {
-  // Get the input fields
   var fName = document.getElementById("fName");
   var fAddress = document.getElementById("fAddress");
   var fEmail = document.getElementById("fEmail");
@@ -8,7 +6,6 @@ function validate() {
   var fPassword = document.getElementById("fPassword");
   var fPhone = document.getElementById("fPhone");
 
-  // Get the error elements
   var errorName = document.getElementById("errorName");
   var errorAddress = document.getElementById("errorAddress");
   var errorEmail = document.getElementById("errorEmail");
@@ -17,11 +14,10 @@ function validate() {
   var errorPhone = document.getElementById("errorPhone");
 
   var error = 0;
-  // Validate fields entered by the user: name, phone, password, and email
 
   if (fName.value === "" || fName.value.trim().length < 3) {
     document.getElementById("fName").classList.add("is-invalid");
-    errorName.style.display = "block"; // Mostrar el error
+    errorName.style.display = "block";
     console.log("error nombre");
     error++;
   }
