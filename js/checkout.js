@@ -1,19 +1,20 @@
 function validate() {
-  var fName = document.getElementById("fName");
-  var fAddress = document.getElementById("fAddress");
-  var fEmail = document.getElementById("fEmail");
-  var fLastN = document.getElementById("fLastN");
-  var fPassword = document.getElementById("fPassword");
-  var fPhone = document.getElementById("fPhone");
+  let fName = document.getElementById("fName");
+  let fAddress = document.getElementById("fAddress");
+  let fEmail = document.getElementById("fEmail");
+  let fLastN = document.getElementById("fLastN");
+  let fPassword = document.getElementById("fPassword");
+  g;
+  let fPhone = document.getElementById("fPhone");
 
-  var errorName = document.getElementById("errorName");
-  var errorAddress = document.getElementById("errorAddress");
-  var errorEmail = document.getElementById("errorEmail");
-  var errorLastN = document.getElementById("errorLastN");
-  var errorPassword = document.getElementById("errorPassword");
-  var errorPhone = document.getElementById("errorPhone");
+  let errorName = document.getElementById("errorName");
+  let errorAddress = document.getElementById("errorAddress");
+  let errorEmail = document.getElementById("errorEmail");
+  let errorLastN = document.getElementById("errorLastN");
+  let errorPassword = document.getElementById("errorPassword");
+  let errorPhone = document.getElementById("errorPhone");
 
-  var error = 0;
+  let error = 0;
 
   if (fName.value === "" || fName.value.trim().length < 3) {
     document.getElementById("fName").classList.add("is-invalid");
