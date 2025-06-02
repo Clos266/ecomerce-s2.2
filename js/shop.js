@@ -94,6 +94,7 @@ function cleanCart() {
   cartTable.innerHTML = "";
   document.getElementById("total_price").innerHTML = "00.00";
   cart = [];
+  countProduct();
 }
 
 function calculateTotal() {
