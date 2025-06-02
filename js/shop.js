@@ -80,7 +80,6 @@ function buy(id) {
     cart.push(product);
   } else {
     cartProduct.quantity += 1;
-    console.log("cartProduct", cartProduct, cartProduct.quantity);
   }
 
   applyPromotionsCart();
@@ -111,7 +110,6 @@ function calculateTotal() {
 
 function applyPromotionsCart() {
   if (!Array.isArray(cart)) {
-    console.error("cart no es un array:", cart);
     return;
   }
 
@@ -147,7 +145,7 @@ function countProduct() {
     count += parseInt(item.quantity);
   });
   document.getElementById("count_product").innerHTML = count;
-  console.log(count);
+
   return count;
 }
 
