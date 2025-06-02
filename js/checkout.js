@@ -1,5 +1,6 @@
 // Exercise 6
 function validate() {
+  event.preventDefault();
   // Get the input fields
   var fName = document.getElementById("fName");
   var fAddress = document.getElementById("fAddress");
