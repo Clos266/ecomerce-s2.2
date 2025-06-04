@@ -1,21 +1,4 @@
 function validate() {
-<<<<<<< HEAD
-  var fName = document.getElementById("fName");
-  var fAddress = document.getElementById("fAddress");
-  var fEmail = document.getElementById("fEmail");
-  var fLastN = document.getElementById("fLastN");
-  var fPassword = document.getElementById("fPassword");
-  var fPhone = document.getElementById("fPhone");
-
-  var errorName = document.getElementById("errorName");
-  var errorAddress = document.getElementById("errorAddress");
-  var errorEmail = document.getElementById("errorEmail");
-  var errorLastN = document.getElementById("errorLastN");
-  var errorPassword = document.getElementById("errorPassword");
-  var errorPhone = document.getElementById("errorPhone");
-
-  var error = 0;
-=======
   event.preventDefault();
   let fName = document.getElementById("fName");
   let fAddress = document.getElementById("fAddress");
@@ -32,15 +15,10 @@ function validate() {
   let errorPhone = document.getElementById("errorPhone");
 
   let error = 0;
->>>>>>> lvl-3-dev
 
   if (fName.value === "" || fName.value.trim().length < 3) {
     document.getElementById("fName").classList.add("is-invalid");
     errorName.style.display = "block";
-<<<<<<< HEAD
-    console.log("error nombre");
-=======
->>>>>>> lvl-3-dev
     error++;
   } else {
     fName.classList.remove("is-invalid");
