@@ -140,7 +140,7 @@ function printCart() {
     )}</td>
     <td><button onclick="removeFromCart(${
       item.id
-    })" class="btn btn-danger btn-sm">-</button></td>
+    })" class="btn-danger">-</button></td>
     </tr>`;
   });
 }
