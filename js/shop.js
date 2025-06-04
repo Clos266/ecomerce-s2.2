@@ -80,7 +80,6 @@ function buy(id) {
     cart.push(product);
   } else {
     cartProduct.quantity += 1;
-    console.log("cartProduct", cartProduct, cartProduct.quantity);
   }
 
   applyPromotionsCart();
@@ -111,7 +110,6 @@ function calculateTotal() {
 
 function applyPromotionsCart() {
   if (!Array.isArray(cart)) {
-    console.error("cart no es un array:", cart);
     return;
   }
 
@@ -133,12 +131,17 @@ function printCart() {
   cartTable.innerHTML = "";
 
   cart.forEach((item) => {
-    cartTable.innerHTML += `<tr><th scope="row">${item.name}</th>
+    cartTable.innerHTML += `<tr>
+    <th scope="row">${item.name}</th>
     <td>${item.price}</td>
     <td>${item.quantity}</td>
     <td>${(item.subtotalWithDiscount ?? item.price * item.quantity).toFixed(
       2
-    )}</td></tr>`;
+    )}</td>
+    <td><button onclick="removeFromCart(${
+      item.id
+    })" class="btn-danger">-</button></td>
+    </tr>`;
   });
 }
 function countProduct() {
@@ -147,11 +150,26 @@ function countProduct() {
     count += parseInt(item.quantity);
   });
   document.getElementById("count_product").innerHTML = count;
-  console.log(count);
+
   return count;
 }
 
-function removeFromCart(id) {}
+function removeFromCart(id) {
+  let cartProduct = cart.find((item) => item.id === id);
+
+  if (!cartProduct) return; // No está en el carrito
+
+  if (cartProduct.quantity === 1) {
+    cart = cart.filter((item) => item.id !== id); // Eliminar del carrito
+  } else {
+    cartProduct.quantity -= 1;
+  }
+
+  applyPromotionsCart();
+  printCart();
+  calculateTotal();
+  countProduct();
+}
 
 function open_modal() {
   printCart();
